@@ -122,6 +122,10 @@ This is why you (each student but ideally as a team) should come to OH during th
 
 **Question 2:** Based on your plan above, make a sketch of what the dashboard would look like. See this week's readings for examples. Be detailed about what kinds of data points and visualizations you want to see in different parts of the page. Consider the user experience and how you should position more general information compared to more specific information, and where you may need some additional explanation to help the viewer understand a graphic, for example. In your sketch, it is useful to give labels to different objects, because in the steps below you can split up work between team members and the labels will help you connect the UI with the data objects. Show your sketches in OH to get credit for this question.
 
+![instructor](instructor_sketch.png)
+![student](student_sketch.png)
+
+
 # Part 2: Dashboard Wire-frame Implementation
 
 This is where you generate the dashboard layout. You are given a very basic wire frame example for the dashboard below. For more information on how R Shiny Dashboards work, look at https://rstudio.github.io/shinydashboard/get_started.html and https://rstudio.github.io/shinydashboard/structure.html. You can add different types of content into a `fuidRow()`. In the starter code, there are 2 rows of content: the first has two little info boxes; the second has two larger viz boxes. You can add more rows and change what is in them as you wish. Follow the naming convention, e.g. `inst.info1` is the first info box for instructors.
