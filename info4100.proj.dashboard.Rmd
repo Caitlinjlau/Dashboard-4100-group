@@ -87,38 +87,38 @@ This is why you (each student but ideally as a team) should come to OH during th
 *Planning for the student dashboard*
 
 * For whom? Who will use it and what is their background?
-    + [add your answer here]
-    + [add your answer here]
+    + [A college (undergrad and grad) student who is interested in their grades in a CS business intelligence course]
+    + [They come from a variety of backgrounds in programming experience, varied SQL experience, and data visualization experience]
     
 * Why? What is the goal? What questions to answer?
-    + [add your answer here]
-    + [add your answer here]
+    + [They want to track their progress in the course in order to maintain their grades or to see how well they need to do in the rest of the course, Identify weaknesses in their skills, provide a more interactive experience with videos and quizzes,  ]
+    + [Their goal to understand their standing in class. The questions to answers is what topics should they focus on more, How can I improve my time management for studying for this course.]
 
 * What? What data to show and what is its structure?
-    + [add your answer here]
-    + [add your answer here]
+    + [Show previous grades that the student has received. Their grades as compared to the rest of the class. Upcoming deadlines. ]
+    + [It's structures would be numeric means for previous grades and bar graphs and line graphs as visual representations. ]
         
 * How? How will visualizations support the goal?
-    + [add your answer here]
-    + [add your answer here]
+    + [For students the visualization will help them know how they are doing compared to other students at every single point in the semester rather than just exams. To know which topics they need to focus more on.]
+    + [Gives them a broader perspective of the big picture of the course]
     
 *Planning for the teacher dashboard*
 
 * For whom? Who will use it and what is their background?
-    + [add your answer here]
-    + [add your answer here]
+    + [College CS professor who is interested in tracking the progress of their student]
+    + [CS department manager to oversee how well the CS professor is teaching their students]
     
 * Why? What is the goal? What questions to answer?
-    + [add your answer here]
-    + [add your answer here]
+    + [To identify when which students need intervention, A question would be: What topics the overall students need more help on?, ]
+    + [The goal is to gauge the overall effectiveness of the course. Why: To see how much the students are participating in the course. To answer the question of gauging participation with performance. ] 
 
 * What? What data to show and what is its structure?
-    + [add your answer here]
-    + [add your answer here]
+    + [The data to show is the grades that people have been getting in the form of a distribution rather than numeric values. Data to track the performance and participation in the course. The average temperature variable ( how students feel about how they are doing in the class)]
+    + [Experience level of the students in the course prior to the course (programming, SQL, datavis). We will show its structure through boxplots, histograms, scatterplots, and line graphs. ]
         
 * How? How will visualizations support the goal?
-    + [add your answer here]
-    + [add your answer here]
+    + [Save them a lot of time on figuring out how people are performing and how the course material is being received. ]
+    + [Helps keep information organized for the instructor.]
 
 **Question 2:** Based on your plan above, make a sketch of what the dashboard would look like. See this week's readings for examples. Be detailed about what kinds of data points and visualizations you want to see in different parts of the page. Consider the user experience and how you should position more general information compared to more specific information, and where you may need some additional explanation to help the viewer understand a graphic, for example. In your sketch, it is useful to give labels to different objects, because in the steps below you can split up work between team members and the labels will help you connect the UI with the data objects. Show your sketches in OH to get credit for this question.
 
