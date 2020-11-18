@@ -114,7 +114,7 @@ This is why you (each student but ideally as a team) should come to OH during th
 
 * What? What data to show and what is its structure?
     + [The data to show is the grades that people have been getting in the form of a distribution rather than numeric values. Data to track the performance and participation in the course. The average temperature variable ( how students feel about how they are doing in the class)]
-    + [Experience level of the students in the course prior to the course (programming, SQL, datavis). We will show its structure through boxplots, histograms, scatterplots, and line graphs. ]
+    + [Experience level of the students in the course prior to the course (programming, SQL, datavis). We will show its structure through histograms, scatterplots, and line graphs. ]
         
 * How? How will visualizations support the goal?
     + [Save them a lot of time on figuring out how people are performing and how the course material is being received. ]
