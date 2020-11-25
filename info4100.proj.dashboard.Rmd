@@ -1,6 +1,6 @@
 ---
 title: "Dashboards for Clicker Data"
-author: '[[Caitlin Lau, CJL236]]'
+author: '[[Caitlin Lau, CJL236; Destiny Malloy DAM359]]'
 subtitle: INFO 4100 Learning Analytics
 output:
   word_document: default
@@ -128,7 +128,7 @@ This is why you (each student but ideally as a team) should come to OH during th
 
 # Part 2: Dashboard Wire-frame Implementation
 
-This is where you generate the dashboard layout. You are given a very basic wire frame example for the dashboard below. For more information on how R Shiny Dashboards work, look at https://rstudio.github.io/shinydashboard/get_started.html and https://rstudio.github.io/shinydashboard/structure.html. You can add different types of content into a `fuidRow()`. In the starter code, there are 2 rows of content: the first has two little info boxes; the second has two larger viz boxes. You can add more rows and change what is in them as you wish. Follow the naming convention, e.g. `inst.info1` is the first info box for instructors.
+This is where you generate the dashboard layout. You are given a very basic wire frame example for the dashboard below. For more information on how R Shiny Dashboards work, look at https://rstudio.github.io/shinydashboard/get_started.html and https://rstudio.github.io/shinydashboard/structure.html. You can add different types of content into a `fluidRow()`. In the starter code, there are 2 rows of content: the first has two little info boxes; the second has two larger viz boxes. You can add more rows and change what is in them as you wish. Follow the naming convention, e.g. `inst.info1` is the first info box for instructors.
 
 Your team can split up the tasks. Some work on creating the UI (this part), while others work on pre-processing the data and creating the statistics and visualizations that will populate the UI (next part).
 
@@ -184,7 +184,63 @@ Use the space below to be ready for your information visualizations in the dashb
 ####### BEGIN INPUT             #######
 #######################################
 
+all_data = inner_join(quiz,experience, by="STUDENT_KEY")
+all_data
 
+
+#INSTRUCTOR DASHBOARD DATA
+
+
+
+
+
+
+
+#STUDENT DASHBOARD DATA
+
+#score per quiz
+student_quiz_scores <- all_data %>%
+  group_by(STUDENT_KEY,QUIZ_NUMBER) %>%
+  summarise(
+    score = QUIZ_SCORE
+  ) %>%
+  arrange(STUDENT_KEY, QUIZ_NUMBER)
+
+student_quiz_scores <- distinct(student_quiz_scores)
+
+student_quiz_scores <- subset(student_quiz_scores, !is.na(score))
+
+#their average grade
+student_averages <- student_quiz_scores %>%
+  group_by(STUDENT_KEY) %>%
+  summarise(
+    average_grade = mean(score)
+  )
+
+
+test = subset(all_data , STUDENT_KEY == 2) %>%
+  summarise(
+    session = SESSION_NUMBER,
+    quiz = QUIZ_NUMBER,
+    score = QUIZ_SCORE
+  ) %>%
+  arrange(session)
+
+#they have attended ... lectures so far
+lectures_per_year <- all_data %>%
+group_by(YEAR.x) %>%
+  summarise(
+    total_lectures = max(SESSION_NUMBER)
+  )
+
+lectures_attended <- all_data %>%
+  group_by(STUDENT_KEY) %>%
+  summarise(
+    n = sum(ATTENDED)
+  )
+
+#weakest unit (lowest grade paired with lowest temperature scores)
+student
 
 #######################################
 #######################################
