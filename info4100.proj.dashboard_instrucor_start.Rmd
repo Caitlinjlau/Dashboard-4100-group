@@ -172,6 +172,7 @@ combined_allyears = full_join(x = quiz, y = select(experience, !"YEAR"), by = "S
 combined_2018 = combined_allyears %>% filter(combined_allyears$YEAR == 2018 & !is.na(combined_allyears$QUIZ_NUMBER))
 
 #quiz grades frequency
+#plot
 inst_quiz_score_hist = ggplot(combined_2018, aes(x = QUIZ_SCORE, fill = PROG)) +
   geom_histogram(binwidth=0.5) +
   geom_vline(aes(xintercept=mean(QUIZ_SCORE)),
@@ -179,22 +180,61 @@ inst_quiz_score_hist = ggplot(combined_2018, aes(x = QUIZ_SCORE, fill = PROG)) +
   scale_x_continuous(breaks = 1:20)
 
 #avg iclick grade per lecture
+#data
 inst_iclick_data = combined_2018 %>% select(CORRECT_Q_CLICKER, PROG, SESSION_NUMBER) %>%
   group_by(SESSION_NUMBER) %>%
   summarise(
     avg_iclk_grade = mean(CORRECT_Q_CLICKER)
   )
-
-inst_iclick_hist = ggplot(inst_iclick_data, aes(x = SESSION_NUMBER, y = avg_iclk_grade)) +
+#plot
+inst_iclick_plot = ggplot(inst_iclick_data, aes(x = SESSION_NUMBER, y = avg_iclk_grade)) +
   geom_line(color = "blue") +
   geom_point() +
   scale_x_continuous(breaks = 1:23)
+
+#attendance per lecture
+#data
+inst_attendance_data = combined_2018 %>% select(SESSION_NUMBER, ATTENDED) %>%
+  group_by(SESSION_NUMBER) %>%
+  summarise(
+    sum_attended = sum(ATTENDED)
+  )
+#plot
+inst_attendance_plot = ggplot(inst_attendance_data, aes(x = SESSION_NUMBER, y = sum_attended)) +
+  geom_line(color = "blue") +
+  geom_point() +
+  scale_x_continuous(breaks = 1:23)
+
+#class experience
+#data
+inst_classexp_data = combined_2018 %>% select(14:22) %>%
+  filter(!is.na(DATABASE_SCORE)) %>%
+  group_by(PROG) %>%
+  summarise(
+    database = mean(DATABASE_SCORE),
+    sql = mean(SQL_SCORE),
+    programming = mean(PROGRAMING_SCORE),
+    stored = mean(STORED_PROC_SCORE),
+    etl = mean(ETL_SCORE),
+    data_vis = mean(DATA_VIS_SCORE),
+    requirement = mean(REQUIREMENT_GATHER_SCORE),
+    skill_survey = mean(SKILL_SURVEY_SCORE)
+  )
+
+inst_classexp_data_2 <- pivot_longer(inst_classexp_data, cols=c('database', 'sql', 'programming', 'stored',
+                                                                'etl', 'data_vis', 'requirement', 'skill_survey'),
+                      names_to='variable',  values_to="value")
+
+
+#plot
+inst_classexp_bar = ggplot(inst_classexp_data_2, aes(x = variable, y = value, fill = PROG)) +
+  geom_bar(stat = "identity", position = 'dodge')
+
 
 #2017
 combined_2017 = filter(quiz, (quiz$YEAR == 2017 & !is.na(quiz$QUIZ_NUMBER)))
 #2016
 combined_2016 = filter(quiz, (quiz$YEAR == 2016 & !is.na(quiz$QUIZ_NUMBER)))
-
 
 
 #######################################
@@ -231,9 +271,14 @@ server = function(input, output) {
     })
     
     output$inst.plot2 = renderPlot({
-        inst_iclick_hist
+        inst_iclick_plot
     })
-    
+    output$inst.plot3 = renderPlot({
+        inst_attendance_plot
+    })
+    output$inst.plot4 = renderPlot({
+        inst_classexp_bar
+    })
 #######################################
 #######################################
     
@@ -283,12 +328,20 @@ dbody = dashboardBody(
     # Any visualization
     fluidRow(
         box(
-            title = "Box 1",
+            title = "Quiz Score",
             plotOutput("inst.plot1", height = 250)
         ),
         box(
-            title = "Box 2",
+            title = "Iclicker",
             plotOutput("inst.plot2", height = 250)
+        ),
+        box(
+          title = "Attendance",
+          plotOutput("inst.plot3", height = 250)
+        ),
+        box(
+          title = "Class Experience",
+          plotOutput("inst.plot4", height = 250)
         )
     )
     ),
