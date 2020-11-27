@@ -328,7 +328,7 @@ dbody = dashboardBody(
     # Any visualization
     fluidRow(
         box(
-            title = "Quiz Score",
+            title = "Quiz Score (Dotted = class average)",
             plotOutput("inst.plot1", height = 250)
         ),
         box(
