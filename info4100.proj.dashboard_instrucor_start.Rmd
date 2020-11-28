@@ -146,6 +146,7 @@ Your team can split up the tasks. Some work on creating the UI (this part), whil
 student_dash = tabItem(
   tabName = "student",
   h2("Student Dashboard")
+  
 )
 #######################################
 #######################################
@@ -279,6 +280,12 @@ server = function(input, output) {
     output$inst.plot4 = renderPlot({
         inst_classexp_bar
     })
+    
+    
+    
+     output$student.plot1 = renderPlot({
+        inst_quiz_score_hist
+    })
 #######################################
 #######################################
     
@@ -290,6 +297,38 @@ server = function(input, output) {
 You should be able to simply run the code below **as is** to see your dashboard.
 
 **Note:** Unfortunately, you cannot knit this part into a pdf. So I added `eval=FALSE` to let the knitting run smoothly and you can submit your PDF.
+
+```{r eval=FALSE}
+ 
+
+```
+
+
+```{r eval=FALSE}
+student_dash = tabItem(
+  tabName = "student",
+  h2("Student Dashboard"),
+      fluidRow(
+        box(
+            title = "Quiz Score (Dotted = class average)",
+            plotOutput("student.plot1", height = 250)
+        ),
+        # box(
+        #     title = "Iclicker",
+        #     plotOutput("inst.plot2", height = 250)
+        # ),
+        # box(
+        #   title = "Attendance",
+        #   plotOutput("inst.plot3", height = 250)
+        # ),
+        # box(
+        #   title = "Class Experience",
+        #   plotOutput("inst.plot4", height = 250)
+        # )
+    ),
+)
+```
+
 
 ```{r eval=FALSE}
 #######################################
