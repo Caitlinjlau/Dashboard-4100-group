@@ -74,6 +74,10 @@ library(shinydashboard)
 # This should load the datasets: 
 # experience (123 by 11) and quiz (2423 by 13)
 load("info4100.proj.dashboard.rda")
+
+
+
+library(data.table)
 ```
 
 # Part 1: Planning / Sketching
@@ -257,6 +261,14 @@ ss_quiz_scores <- distinct(ss_quiz_scores)
 ss_quiz_scores_bar = ggplot(ss_quiz_scores, aes(x = QUIZ_NUMBER, y = score, color='blue')) +
   geom_bar(stat = "identity", position = 'dodge', color='black')
 
+#temperature clicker scores
+single_student$Lecture = single_student$SESSION_NUMBER
+single_student$Temperature = ifelse(single_student$COMPLETED_T_CLICKER == 0, 'N/A', single_student$AVG_T_CLICKER)
+
+ss_temp_scores <- single_student[c("Lecture", "Temperature")] %>%
+  arrange(Lecture)
+
+#ss_temp_scores[order(ss_temp_scores$Lecture),]
 
 #student's average grade
 student_averages <- student_quiz_scores %>%
@@ -281,16 +293,15 @@ group_by(YEAR) %>%
     total_lectures = max(SESSION_NUMBER)
   )
 
-lectures_attended <- combined_allyears %>%
+lectures_attended <- single_student %>%
   group_by(STUDENT_KEY) %>%
   summarise(
     n = sum(ATTENDED)
   )
 
 #weakest unit (lowest grade paired with lowest temperature scores)
+single_student$t_by_q_score = ifelse(single_student$COMPLETED_T_CLICKER == 0, single_student$QUIZ_SCORE, single_student$QUIZ_SCORE * single_student$AVG_T_CLICKER)
 
-
-  
   
 #how many people attended each lecture
 # HOW ARE WE DEALING WITH MISSING LECTURES??
@@ -348,6 +359,9 @@ server = function(input, output) {
      output$student.plot1 = renderPlot({
         ss_quiz_scores_bar
     })
+     output$student.plot2 = renderTable({
+       ss_temp_scores
+     })
 #######################################
 #######################################
     
@@ -371,28 +385,23 @@ student_dash = tabItem(
   tabName = "student",
   h2("Student Dashboard"),
       fluidRow(
-        column( width = 12,
+        #column( width = 12,
           box(
             title = "Quiz Score (Dotted = class average)",
-            plotOutput("student.plot1", height = 250)
+            plotOutput("student.plot1", height = 300)
           ),
+          box(
+            title = 'Temperature iClicker Responses by Lecture',
+            tableOutput("student.plot2"),style = "height:300px; overflow-y: scroll;overflow-x: scroll;"
+          )
+         # box(title = "Weakest Unit: Lecture 6", width = NULL, solidHeader = TRUE,
+        #    "Your weakest Unit is the material discussed in lecture 6 because the quiz score associated with that week (Quiz 5) combined with your temperature score for that lecture was the lowest of all weeks.")
         ),
-        column(width = 12,
-          valueBox(mean(ss_quiz_scores$score), 'Your Grade',icon= icon('credit-card'))
-        )
-        # box(
-        #     title = "Iclicker",
-        #     plotOutput("inst.plot2", height = 250)
-        # ),
-        # box(
-        #   title = "Attendance",
-        #   plotOutput("inst.plot3", height = 250)
-        # ),
-        # box(
-        #   title = "Class Experience",
-        #   plotOutput("inst.plot4", height = 250)
-        # )
-    ),
+        #column(width = 12,
+          valueBox(mean(ss_quiz_scores$score), 'Your Grade',icon= icon('user-check')),
+          valueBox(sum(single_student$ATTENDED), "Lectures Attended So Far", icon= icon('calendar'))
+       # )
+
 )
 ```
 
