@@ -238,6 +238,11 @@ combined_2017 = filter(quiz, (quiz$YEAR == 2017 & !is.na(quiz$QUIZ_NUMBER)))
 combined_2016 = filter(quiz, (quiz$YEAR == 2016 & !is.na(quiz$QUIZ_NUMBER)))
 
 
+
+
+#student dashboard
+single_student = combined_2018 %>% filter(STUDENT_KEY == 103)
+
 #######################################
 #######################################
 ```
@@ -284,7 +289,7 @@ server = function(input, output) {
     
     
      output$student.plot1 = renderPlot({
-        inst_quiz_score_hist
+        single_student
     })
 #######################################
 #######################################
