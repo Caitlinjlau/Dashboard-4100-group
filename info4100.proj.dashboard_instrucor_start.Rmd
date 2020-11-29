@@ -287,10 +287,11 @@ test = subset(combined_allyears , STUDENT_KEY == 2) %>%
   arrange(session)
 
 #they have attended ... lectures so far
-lectures_per_year <- combined_allyears %>%
-group_by(YEAR) %>%
+lecture_attendance <- combined_2018 %>%
+  group_by(SESSION_NUMBER) %>%
   summarise(
-    total_lectures = max(SESSION_NUMBER)
+    total_attendees = sum(ATTENDED),
+    single_student_attended = ifelse( nrow(subset(single_student, ATTENDED== 1 && Lecture==SESSION_NUMBER)) == 1, 1, 0)
   )
 
 lectures_attended <- single_student %>%
@@ -392,16 +393,21 @@ student_dash = tabItem(
           ),
           box(
             title = 'Temperature iClicker Responses by Lecture',
-            tableOutput("student.plot2"),style = "height:300px; overflow-y: scroll;overflow-x: scroll;"
-          )
-         # box(title = "Weakest Unit: Lecture 6", width = NULL, solidHeader = TRUE,
-        #    "Your weakest Unit is the material discussed in lecture 6 because the quiz score associated with that week (Quiz 5) combined with your temperature score for that lecture was the lowest of all weeks.")
+            tableOutput("student.plot2"),style = "height:300px; overflow-y: scroll;overflow-x: scroll;")
         ),
+      fluidRow(
         #column(width = 12,
           valueBox(mean(ss_quiz_scores$score), 'Your Grade',icon= icon('user-check')),
-          valueBox(sum(single_student$ATTENDED), "Lectures Attended So Far", icon= icon('calendar'))
+          valueBox(sum(single_student$ATTENDED), "Lectures Attended So Far", icon= icon('calendar')),
+          valueBox(mean(single_student$TOTAL_COMPLETED_CLICKER/single_student$TOTAL_POSSIBLE_CLICKER), "Avg. iClicker Participation", icon = icon('bars'))
        # )
-
+      ),
+      fluidRow(
+         box(title = "Weakest Unit: Lecture 6", width = 6, solidHeader = TRUE,
+        "Your weakest unit is the material discussed in lecture 6 because the quiz score associated with that week (Quiz 5) combined with your temperature score for that lecture was the lowest of all weeks."),
+        box(title = "Strongest Unit: Lecture 20", width = 6, solidHeader = TRUE,
+        "Your strongest unit is the material discussed in lecture 20 because the quiz score associated with that week (Quiz 9) combined with your temperature score for that lecture was the highest of all weeks.")
+      )
 )
 ```
 
