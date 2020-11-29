@@ -240,7 +240,19 @@ lectures_attended <- all_data %>%
   )
 
 #weakest unit (lowest grade paired with lowest temperature scores)
-student
+
+
+  
+  
+#how many people attended each lecture
+# HOW ARE WE DEALING WITH MISSING LECTURES??
+attendance_per_lecture <- all_data %>%
+  group_by(SESSION_NUMBER, YEAR.x) %>%
+  summarise(
+    n_attended = sum(ATTENDED),
+   # student1_attended = nrow(subset(all_data, STUDENT_KEY==1 && SESSION_NUMBER==))
+  )
+
 
 #######################################
 #######################################

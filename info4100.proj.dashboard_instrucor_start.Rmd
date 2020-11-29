@@ -243,6 +243,63 @@ combined_2016 = filter(quiz, (quiz$YEAR == 2016 & !is.na(quiz$QUIZ_NUMBER)))
 #student dashboard
 single_student = combined_2018 %>% filter(STUDENT_KEY == 103)
 
+
+# student's score per quiz
+ss_quiz_scores <- single_student %>%
+  group_by(QUIZ_NUMBER) %>%
+  summarise(
+    score = QUIZ_SCORE
+  ) %>%
+  arrange(QUIZ_NUMBER)
+
+ss_quiz_scores <- distinct(ss_quiz_scores)
+
+ss_quiz_scores_bar = ggplot(ss_quiz_scores, aes(x = QUIZ_NUMBER, y = score, color='blue')) +
+  geom_bar(stat = "identity", position = 'dodge', color='black')
+
+
+#student's average grade
+student_averages <- student_quiz_scores %>%
+  group_by(STUDENT_KEY) %>%
+  summarise(
+    average_grade = mean(score)
+  )
+
+
+test = subset(combined_allyears , STUDENT_KEY == 2) %>%
+  summarise(
+    session = SESSION_NUMBER,
+    quiz = QUIZ_NUMBER,
+    score = QUIZ_SCORE
+  ) %>%
+  arrange(session)
+
+#they have attended ... lectures so far
+lectures_per_year <- combined_allyears %>%
+group_by(YEAR) %>%
+  summarise(
+    total_lectures = max(SESSION_NUMBER)
+  )
+
+lectures_attended <- combined_allyears %>%
+  group_by(STUDENT_KEY) %>%
+  summarise(
+    n = sum(ATTENDED)
+  )
+
+#weakest unit (lowest grade paired with lowest temperature scores)
+
+
+  
+  
+#how many people attended each lecture
+# HOW ARE WE DEALING WITH MISSING LECTURES??
+attendance_per_lecture <- combined_allyears %>%
+  group_by(SESSION_NUMBER, YEAR) %>%
+  summarise(
+    n_attended = sum(ATTENDED),
+   # student1_attended = nrow(subset(all_data, STUDENT_KEY==1 && SESSION_NUMBER==))
+  )
 #######################################
 #######################################
 ```
@@ -289,7 +346,7 @@ server = function(input, output) {
     
     
      output$student.plot1 = renderPlot({
-        single_student
+        ss_quiz_scores_bar
     })
 #######################################
 #######################################
@@ -314,10 +371,15 @@ student_dash = tabItem(
   tabName = "student",
   h2("Student Dashboard"),
       fluidRow(
-        box(
+        column( width = 12,
+          box(
             title = "Quiz Score (Dotted = class average)",
             plotOutput("student.plot1", height = 250)
+          ),
         ),
+        column(width = 12,
+          valueBox(mean(ss_quiz_scores$score), 'Your Grade',icon= icon('credit-card'))
+        )
         # box(
         #     title = "Iclicker",
         #     plotOutput("inst.plot2", height = 250)
