@@ -1,6 +1,6 @@
 ---
 title: "Dashboards for Clicker Data"
-author: '[[Caitlin Lau, CJL236; Destiny Malloy, DAM359; Asma Khan, ; Esuvat Bomani, ; Jeremy Clerc; Trevor Warner]]'
+author: '[[Caitlin Lau, CJL236; Destiny Malloy, DAM359; Esuvat Bomani,EKB72 ;Asma Khan, AK2355 ;  Jeremy Clerc, KC2267; Trevor Warner, TW448]]'
 subtitle: INFO 4100 Learning Analytics
 output:
   word_document: default
@@ -374,18 +374,7 @@ You should be able to simply run the code below **as is** to see your dashboard.
 student_dash = tabItem(
   tabName = "student",
   h2("Student Dashboard"),
-      fluidRow(
-        #column( width = 12,
-          box(
-            title = "Quiz Score (Dotted = class average)",
-            plotOutput("student.plot1", height = 300)
-          ),
-          box(
-            title = 'Temperature iClicker Responses by Lecture',
-            tableOutput("student.plot2"),
-            style = "height:300px; overflow-y: scroll;overflow-x: scroll;")
-        ),
-      fluidRow(
+  fluidRow(
         #column(width = 12,
           valueBox(
             mean(ss_quiz_scores$score),
@@ -410,7 +399,18 @@ student_dash = tabItem(
         "Your strongest unit is the material discussed in lecture 20 because the quiz 
         score associated with that week (Quiz 9) combined with your temperature score
         for that lecture was the highest of all weeks.")
-      )
+      ),
+      fluidRow(
+        #column( width = 12,
+          box(
+            title = "Quiz Score (Dotted = class average)",
+            plotOutput("student.plot1", height = 300)
+          ),
+          box(
+            title = 'Temperature iClicker Responses by Lecture',
+            tableOutput("student.plot2"),
+            style = "height:300px; overflow-y: scroll;overflow-x: scroll;")
+        )
 )
 ```
 
@@ -491,7 +491,7 @@ shinyApp(ui, server)
 
 ![Dashboard Screenshot](example_dash.png)
 ![Instructor Dashboard Screenshot](instructor_dash_7_14pm.png)
-![Student Dashboard Screenshot](student_dash_7_14pm.png)
+![Student Dashboard Screenshot](student_dash.png)
 
 **Question 6:** Evaluate your group dashboard from the perspective of the instructor (teacher dashboard) and from the perspective of the student (student dashboard). What do you like about it, what would you change or add to it if you had more time?
 
