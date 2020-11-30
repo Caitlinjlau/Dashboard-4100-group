@@ -510,7 +510,7 @@ shinyApp(ui, server)
 * What do you like about it?
     + The design is very simple and the charts are complex but still easy to understand.
 * What would you change or add to it if you had more time?
-    + I would want to make it interactive so I could examine each student individually.
+    + We would want to make it interactive so We could examine each student individually.
     + We would like to use feature engineering, and other skills we have learned in this class to predict outcomes of students in this class. For example, predict what attendance will be like on a certain day, this will allow the instructor to understand if they should teach a complex topic on a day where the predicted attendance is relatively low.
 * What was the biggest challenge you faced? How did you address it?
     + It was very difficult trying to think of what things could be made interactive to show data from multiple years (or just one year) by selection, so instead we made the years into different tabs in the sidebar.
