@@ -1,6 +1,6 @@
 ---
 title: "Dashboards for Clicker Data"
-author: '[[Caitlin Lau, CJL236; Destiny Malloy, DAM359; Esuvat Bomani,EKB72 ;Asma Khan, AK2355 ;  Jeremy Clerc, KC2267; Trevor Warner, TW448]]'
+author: '[[Caitlin Lau, CJL236; Destiny Malloy, DAM359; Esuvat Bomani,EKB72 ;Asma Khan, AK2355 ;  Jeremy Clerc, JC2267; Trevor Warner, TW448]]'
 subtitle: INFO 4100 Learning Analytics
 output:
   word_document: default
@@ -504,7 +504,7 @@ shinyApp(ui, server)
     + We would add more styling elements (changing colors and positioning of elements to make the dashboard look more energizing and fun)
 
 * What was the biggest challenge you faced? How did you address it?
-    + The biggest challegne we faced was determining how to show data for lectures that were not represented in the dataset. We chose to skip over those lectures and only show data for what we have. If we had not done this, the dashboard chart and table would look very empty.
+    + The biggest challenge we faced was determining how to show data for lectures that were not represented in the dataset. We chose to skip over those lectures and only show data for what we have. If we had not done this, the dashboard chart and table would look very empty.
 
 *Reflection for the teacher dashboard*
 
