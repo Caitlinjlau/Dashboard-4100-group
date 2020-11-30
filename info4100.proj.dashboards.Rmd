@@ -494,26 +494,24 @@ shinyApp(ui, server)
 ![Student Dashboard Screenshot](student_dash.png)
 
 **Question 6:** Evaluate your group dashboard from the perspective of the instructor (teacher dashboard) and from the perspective of the student (student dashboard). What do you like about it, what would you change or add to it if you had more time?
-
 *Reflection for the student dashboard*
-
 * What do you like about it?
     + There are a lot of details that we could show the student in a simple way using value boxes.
-
+    + We really like the weakest and strongest unit display. As students we often have a difficult time pinpointing our pain-points, this calculation allows the student to have a better understanding of where they could improve their learning.
 * What would you change or add to it if you had more time?
     + We would add more styling elements (changing colors and positioning of elements to make the dashboard look more energizing and fun)
-
+    + We would add more interactive elements such as hover functionalities
+    + We would add forecasting models to show the student what their grade would be if they continued working at the same level, if they start doing better in the course, if they start doing worse in the course
+    + We think it would be cool to integrate the SRL techniques we learnt about into this dashboard, such that the student can record their SRL behaviour. 
+    
 * What was the biggest challenge you faced? How did you address it?
     + The biggest challenge we faced was determining how to show data for lectures that were not represented in the dataset. We chose to skip over those lectures and only show data for what we have. If we had not done this, the dashboard chart and table would look very empty.
-
 *Reflection for the teacher dashboard*
-
 * What do you like about it?
     + The design is very simple and the charts are complex but still easy to understand.
-
 * What would you change or add to it if you had more time?
     + I would want to make it interactive so I could examine each student individually.
-
+    + We would like to use feature engineering, and other skills we have learned in this class to predict outcomes of students in this class. For example, predict what attendance will be like on a certain day, this will allow the instructor to understand if they should teach a complex topic on a day where the predicted attendance is relatively low.
 * What was the biggest challenge you faced? How did you address it?
     + It was very difficult trying to think of what things could be made interactive to show data from multiple years (or just one year) by selection, so instead we made the years into different tabs in the sidebar.
 
